@@ -18,7 +18,7 @@ class KREVNI_PIRAT_API AEnemySpawner : public AActor
 	TArray<TSubclassOf<AVampire>> EnemyClass;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	USceneComponent* SpawnPoint;
+	TObjectPtr<USceneComponent> SpawnPoint;
 	
 public:	
 	// Sets default values for this actor's properties

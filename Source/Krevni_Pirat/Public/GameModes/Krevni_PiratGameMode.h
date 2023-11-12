@@ -16,7 +16,7 @@ class AKrevni_PiratGameMode : public AGameModeBase
 	FTimerHandle SpawnTimer;
 
 	UPROPERTY()
-		TArray<AEnemySpawner*> Spawners;
+	TArray<AEnemySpawner*> Spawners;
 
 public:
 	AKrevni_PiratGameMode();

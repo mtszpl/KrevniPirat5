@@ -14,13 +14,13 @@ class KREVNI_PIRAT_API AGun : public AActor
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UStaticMeshComponent* Mesh;
+	TObjectPtr<UStaticMeshComponent> Mesh;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		USceneComponent* FirePoint;
+	TObjectPtr<USceneComponent> FirePoint;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UParticleSystem* HitEffect;
+	TObjectPtr<UParticleSystem> HitEffect;
 
 	
 public:	

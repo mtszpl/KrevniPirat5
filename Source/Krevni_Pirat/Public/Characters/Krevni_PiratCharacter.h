@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "Krevni_PiratCharacter.generated.h"
 
+class USpringArmComponent;
+class UCameraComponent;
 class ASword;
 class AGun;
 
@@ -16,40 +18,40 @@ class AKrevni_PiratCharacter : public ACharacter
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
+	TObjectPtr<USpringArmComponent> CameraBoom;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-		FVector CameraAimingOffset;
+	FVector CameraAimingOffset;
 
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FollowCamera;
+	TObjectPtr<UCameraComponent> FollowCamera;
 
 #pragma region Weapons
 
 	UPROPERTY(EditAnywhere, Category = Weapons, meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<ASword> SwordClass;
+	TSubclassOf<ASword> SwordClass;
 
 	UPROPERTY(EditAnywhere, Category = Weapons, meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<AGun> GunClass;
+	TSubclassOf<AGun> GunClass;
 
 	UPROPERTY(VisibleAnywhere, Category = Weapons, meta = (AllowPrivateAccess = "true"))
-		USceneComponent* SwordAttach;
+	TObjectPtr<USceneComponent> SwordAttach;
 
 	UPROPERTY(VisibleAnywhere, Category = Weapons, meta = (AllowPrivateAccess = "true"))
-		USceneComponent* SwordHand;
+	TObjectPtr<USceneComponent> SwordHand;
 
 	UPROPERTY(VisibleAnywhere, Category = Weapons, meta = (AllowPrivateAccess = "true"))
-		USceneComponent* GunAttach;
+	TObjectPtr<USceneComponent> GunAttach;
 
 	UPROPERTY(VisibleAnywhere, Category = Weapons, meta = (AllowPrivateAccess = "true"))
-		USceneComponent* GunHand;
+	TObjectPtr<USceneComponent> GunHand;
 
 	UPROPERTY()
-		ASword* Sword;
+	TObjectPtr<ASword> Sword;
 
 	UPROPERTY()
-		AGun* Gun;
+	TObjectPtr<AGun> Gun;
 
 #pragma endregion
 
@@ -63,22 +65,22 @@ class AKrevni_PiratCharacter : public ACharacter
 
 #pragma region Animations
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animations, meta = (AllowPrivateAccess = "true"))
-		UAnimMontage* SheathSwordMontage;
+	TObjectPtr<UAnimMontage> SheathSwordMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animations, meta = (AllowPrivateAccess = "true"))
-		UAnimMontage* DrawSwordMontage;
+	TObjectPtr<UAnimMontage> DrawSwordMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animations, meta = (AllowPrivateAccess = "true"))
-		TArray<UAnimMontage*> SwordAttackMontage;
+	TArray<TObjectPtr<UAnimMontage>> SwordAttackMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animations, meta = (AllowPrivateAccess = "true"))
-		UAnimMontage* DrawGunMontage;
+	TObjectPtr<UAnimMontage> DrawGunMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animations, meta = (AllowPrivateAccess = "true"))
-		UAnimMontage* SheathGunMontage;
+	TObjectPtr<UAnimMontage> SheathGunMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animations, meta = (AllowPrivateAccess = "true"))
-		UAnimMontage* GunFireMontage;
+	TObjectPtr<UAnimMontage> GunFireMontage;
 
 #pragma endregion
 

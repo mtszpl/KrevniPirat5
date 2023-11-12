@@ -17,10 +17,10 @@ class KREVNI_PIRAT_API APirateHUD : public AHUD
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<UAimingWidget> AimWidgetClass;
+	TSubclassOf<UAimingWidget> AimWidgetClass;
 
 	UPROPERTY()
-		UAimingWidget* AimWidget;
+	TObjectPtr<UAimingWidget> AimWidget;
 
 protected:
 	void BeginPlay() override;

@@ -14,13 +14,13 @@ class KREVNI_PIRAT_API ABloodstore : public AActor
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
-	USceneComponent* Root;
+	TObjectPtr<USceneComponent> Root;
 	
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* Mesh;
+	TObjectPtr<UStaticMeshComponent> Mesh;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	UBoxComponent* Collider;
+	TObjectPtr<UBoxComponent> Collider;
 
 	UFUNCTION()
 	void OnHit();

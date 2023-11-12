@@ -7,6 +7,8 @@
 #include "InputActionValue.h"
 #include "PirateController.generated.h"
 
+class UInputMappingContext;
+class UInputAction;
 class APirateHUD;
 
 /**
@@ -19,28 +21,28 @@ class KREVNI_PIRAT_API APirateController : public APlayerController
 
 #pragma region InputActions
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	class UInputMappingContext* MappingContext;
+	TObjectPtr<UInputMappingContext> MappingContext;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		class UInputAction* MoveAction;
+	TObjectPtr<UInputAction> MoveAction;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UInputAction* LookAction;
+	TObjectPtr<UInputAction> LookAction;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UInputAction* JumpAction;
+	TObjectPtr<UInputAction> JumpAction;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UInputAction* RotateAction;
+	TObjectPtr<UInputAction> RotateAction;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UInputAction* DrawWeaponAction;
+	TObjectPtr<UInputAction> DrawWeaponAction;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UInputAction* AimAction;
+	TObjectPtr<UInputAction> AimAction;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UInputAction* AttackAction;
+	TObjectPtr<UInputAction> AttackAction;
 
 #pragma endregion
 
@@ -49,58 +51,58 @@ class KREVNI_PIRAT_API APirateController : public APlayerController
 
 
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		bool bIsJumping = false;
+	bool bIsJumping = false;
 
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		bool bIsFalling = false;
+	bool bIsFalling = false;
 
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		bool bIsShooting = false;
+	bool bIsShooting = false;
 #pragma endregion
 
 	UPROPERTY(EditAnywhere, Category = Settings, meta = (AllowPrivateAccess = "true"))
-		float MouseXSensitivity = 10;
+	float MouseXSensitivity = 10;
 
 	UPROPERTY(EditAnywhere, Category = Settings, meta = (AllowPrivateAccess = "true"))
-		float MouseYSensitivity = 10;
+	float MouseYSensitivity = 10;
 
 	UPROPERTY()
-		APirateHUD* HUD;
+	APirateHUD* HUD;
 		
 	void SetupInput();
 
 #pragma region Inputs
 
 	UFUNCTION()
-		void Move(const FInputActionValue& Value);
+	void Move(const FInputActionValue& Value);
 
 	UFUNCTION()
-		void Look(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
 
 	UFUNCTION()
-		void Rotate(const FInputActionValue& Value);
+	void Rotate(const FInputActionValue& Value);
 
 	UFUNCTION()
-		void Jump();
+	void Jump();
 
 	UFUNCTION()
-		void StartFalling();
+	void StartFalling();
 
 	UFUNCTION()
-		void OnCharacterFallDown(const FHitResult& Hit);
+	void OnCharacterFallDown(const FHitResult& Hit);
 #pragma endregion
 
 	UFUNCTION()
-		void Attack();
+	void Attack();
 
 	UFUNCTION()
-		void ToggleArmed();
+	void ToggleArmed();
 
 	UFUNCTION()
-		void StartAiming();
+	void StartAiming();
 
 	UFUNCTION()
-		void StopAiming();
+	void StopAiming();
 protected:
 	void BeginPlay() override;
 

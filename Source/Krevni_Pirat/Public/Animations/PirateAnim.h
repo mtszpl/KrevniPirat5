@@ -6,6 +6,9 @@
 #include "Animation/AnimInstance.h"
 #include "PirateAnim.generated.h"
 
+class APirateController;
+class AKrevni_PiratCharacter;
+
 /**
  * 
  */
@@ -15,34 +18,34 @@ class KREVNI_PIRAT_API UPirateAnim : public UAnimInstance
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		bool bIsJumping;
+	bool bIsJumping;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		bool bIsFalling;
+	bool bIsFalling;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		bool bIsArmed;
+	bool bIsArmed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		bool bIsAiming;
+	bool bIsAiming;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		float Speed;
+	float Speed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		float Direction;
+	float Direction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		float Yaw;
+	float Yaw;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		float Pitch;
+	float Pitch;
 
 	UPROPERTY()
-		class APirateController* Controller;
+	TObjectPtr<APirateController> Controller;
 
 	UPROPERTY()
-		class AKrevni_PiratCharacter* Pirat;
+	TObjectPtr<AKrevni_PiratCharacter> Pirat;
 
 protected:
 

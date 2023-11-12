@@ -15,16 +15,16 @@ class KREVNI_PIRAT_API AVampire : public APawn
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	USceneComponent* Root;
+	TObjectPtr<USceneComponent> Root;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	USkeletalMeshComponent* Mesh;
+	TObjectPtr<USkeletalMeshComponent> Mesh;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	UCapsuleComponent* Collider;
+	TObjectPtr<UCapsuleComponent> Collider;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	UFloatingPawnMovement* Movement;
+	TObjectPtr<UFloatingPawnMovement> Movement;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	int32 hp = 50;
