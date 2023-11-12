@@ -1,0 +1,11 @@
+[/Script/EngineSettings.GeneralProjectSettings]
+<<<<<<< HEAD
+ProjectID=528E03DF4022B0B95C5A09937EA3B554
+=======
+ProjectID=32B0DA254015B7E1E54EC09B392D3517
+>>>>>>> master
+ProjectName=Third Person Game Template
+
+[StartupActions]
+bAddPacks=True
+InsertPack=(PackSource="StarterContent.upack",PackName="StarterContent")
