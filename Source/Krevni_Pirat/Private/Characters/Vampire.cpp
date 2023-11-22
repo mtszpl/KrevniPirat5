@@ -24,19 +24,34 @@ AVampire::AVampire()
 void AVampire::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	if(!IsValid(GetController()))
+		SpawnDefaultController();
+}
+
+void AVampire::Attack()
+{
+	if (AttackMontages.IsEmpty())
+		return;
+	int32 Index = FMath::RandRange(0, AttackMontages.Num() - 1);
+	Mesh->PlayAnimation(AttackMontages[Index], false);
 }
 
 void AVampire::GetHit(int32 damage)
 {
-	hp -= damage;
-	if (hp <= 0)
+	if (bIsDead)
+		return;
+	Hp -= damage;
+	if (Hp <= 0)
 		Die();
 }
 
 void AVampire::Die()
 {
-	if (IsValid(DeadMontage))
-		Mesh->PlayAnimation(DeadMontage, false);
-	Destroy();
+	//if (IsValid(DeadMontage))
+	//	Mesh->PlayAnimation(DeadMontage, false);
+	GetController()->UnPossess();
+	bIsDead = true;
+	OnDeath.Broadcast();
+	bBlockInput = true;
+	SetLifeSpan(CorpseRemainTime);
 }

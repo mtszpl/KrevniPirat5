@@ -93,22 +93,22 @@ class AKrevni_PiratCharacter : public ACharacter
 	float GunAnimTime = 0;
 
 	UFUNCTION()
-		void SwordGrab();
+	void SwordGrab();
 
 	UFUNCTION()
-		void SwordLeave();
+	void SwordLeave();
 
 	UFUNCTION()
-		void GunGrab();
+	void GunGrab();
 
 	UFUNCTION()
-		void GunLeave();
+	void GunLeave();
 
 	UFUNCTION()
-		void AfterSwordAttack();
+	void AfterSwordAttack();
 
 	UFUNCTION()
-		void AfterGunFire();
+	void AfterGunFire();
 
 public:
 	AKrevni_PiratCharacter();

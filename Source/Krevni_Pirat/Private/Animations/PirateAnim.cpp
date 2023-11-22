@@ -7,12 +7,14 @@
 
 void UPirateAnim::NativeBeginPlay()
 {
+	Super::NativeBeginPlay();
 	Pirat = Cast<AKrevni_PiratCharacter>(TryGetPawnOwner());
 	Controller = Cast<APirateController>(TryGetPawnOwner()->GetController());
 }
 
 void UPirateAnim::NativeUpdateAnimation(float deltaSeconds)
 {
+	Super::NativeUpdateAnimation(deltaSeconds);
 	if (IsValid(Pirat))
 	{
 		bIsAiming = Pirat->GetIsAiming();
@@ -24,7 +26,6 @@ void UPirateAnim::NativeUpdateAnimation(float deltaSeconds)
 		Yaw = aim.Yaw - rot.Yaw;
 		Pitch = aim.Pitch - rot.Pitch;
 		FVector vec = Pirat->GetVelocity().RotateAngleAxis(Yaw, {0, 0, 1});
-		GEngine->AddOnScreenDebugMessage(1, 1, FColor::Red, FString::SanitizeFloat(Direction));
 	}
 	if (IsValid(Controller))
 	{

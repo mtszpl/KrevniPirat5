@@ -108,6 +108,8 @@ void APirateController::ToggleArmed()
 void APirateController::StartAiming()
 {
 	AKrevni_PiratCharacter* Pirate = Cast< AKrevni_PiratCharacter>(GetCharacter());
+	if (!Pirate->GetIsArmed())
+		return;
 	if (IsValid(Pirate))
 	{
 		Pirate->StartAiming();

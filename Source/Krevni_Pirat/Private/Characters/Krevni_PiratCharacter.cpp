@@ -160,14 +160,14 @@ void AKrevni_PiratCharacter::Attack()
 	bIsAttacking = true;
 	if(bIsAiming)
 	{ 
-		GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "Attack");
-		if (IsValid(GunFireMontage))
-			PlayAnimMontage(GunFireMontage);
-		float lastingTime = GunFireMontage->GetPlayLength() / GunFireMontage->RateScale;
-		GetWorld()->GetTimerManager().SetTimer(AttackHandle, this, &ThisClass::AfterGunFire, lastingTime, false);
-		PlayAnimMontage(GunFireMontage);
 		if (IsValid(Gun))
+		{
 			Gun->Fire(FollowCamera);
+			if (IsValid(GunFireMontage))
+				PlayAnimMontage(GunFireMontage);
+			GetWorld()->GetTimerManager().SetTimer(AttackHandle, this, &ThisClass::AfterGunFire, Gun->GetReloadTime(), false);
+			PlayAnimMontage(GunFireMontage);			
+		}
 	}
 	else
 	{

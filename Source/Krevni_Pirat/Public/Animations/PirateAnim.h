@@ -49,8 +49,8 @@ class KREVNI_PIRAT_API UPirateAnim : public UAnimInstance
 
 protected:
 
-	void NativeBeginPlay();
+	void NativeBeginPlay() override;
 
-	void NativeUpdateAnimation(float deltaSeconds);
+	void NativeUpdateAnimation(float deltaSeconds) override;
 	
 };

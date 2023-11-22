@@ -22,14 +22,23 @@ class KREVNI_PIRAT_API AGun : public AActor
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UParticleSystem> HitEffect;
 
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	int32 Range = 1000;
+
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	int32 Damage = 50;
+
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	float ReloadTime;
+
+	float RemainingReload;
+
+	bool bIsReloading = false;
 	
 public:	
 	AGun();
 
 	void Fire(UCameraComponent* Camera);
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
+	float GetReloadTime();
 };

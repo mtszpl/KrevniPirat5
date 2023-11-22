@@ -27,10 +27,24 @@ class KREVNI_PIRAT_API AVampire : public APawn
 	TObjectPtr<UFloatingPawnMovement> Movement;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	int32 hp = 50;
+	int32 Hp = 50;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		UAnimMontage* DeadMontage;
+	int32 AttackPower = 10;
+
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	int32 CorpseRemainTime = 10;
+
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UAnimMontage> DeadMontage;
+
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	TArray<TObjectPtr<UAnimMontage>> AttackMontages;
+
+	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
+	bool bIsDead = false;
+
+	DECLARE_MULTICAST_DELEGATE(OnDeathDelegate);
 
 public:
 	// Sets default values for this pawn's properties
@@ -42,8 +56,11 @@ protected:
 
 public:	
 
+	void Attack();
+
 	void GetHit(int32 damage);
 
 	void Die();
 
+	OnDeathDelegate OnDeath;
 };

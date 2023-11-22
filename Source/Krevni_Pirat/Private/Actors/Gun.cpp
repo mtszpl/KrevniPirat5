@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystem.h"
 #include "DrawDebugHelpers.h"
+#include "../../Public/Characters/Vampire.h"
 
 // Sets default values
 AGun::AGun()
@@ -20,20 +21,21 @@ AGun::AGun()
 
 void AGun::Fire(UCameraComponent* Camera)
 {
+	UE_LOG(LogTemp, Log, TEXT("%f"), RemainingReload);
 	FHitResult Hit;
-	DrawDebugSphere(GetWorld(), Camera->GetComponentLocation() + Camera->GetForwardVector() * 10000, 10, 48, FColor::Cyan, false, 10);
-	DrawDebugLine(GetWorld(), FirePoint->GetComponentLocation(), Camera->GetComponentLocation() + Camera->GetForwardVector() * 1000, FColor::Red, false, 10);
-	if(GetWorld()->LineTraceSingleByChannel(Hit, FirePoint->GetComponentLocation(), Camera->GetComponentLocation() + Camera->GetForwardVector() * 1000, ECollisionChannel::ECC_Visibility))
+	if(GetWorld()->LineTraceSingleByChannel(Hit, Camera->GetComponentLocation(), Camera->GetComponentLocation() + Camera->GetForwardVector() * Range, ECollisionChannel::ECC_Visibility))
 	{
-		//GEngine->AddOnScreenDebugMessage(1, 5, FColor::Red, Hit.Actor->GetName());
 		if(IsValid(HitEffect))
 			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, Hit.ImpactPoint);
+		AVampire* Vamp = Cast<AVampire>(Hit.GetActor());
+		if (IsValid(Vamp))
+			Vamp->GetHit(Damage);
 	}
+	RemainingReload = ReloadTime;
+	bIsReloading = true;
 }
 
-// Called when the game starts or when spawned
-void AGun::BeginPlay()
+float AGun::GetReloadTime()
 {
-	Super::BeginPlay();
-	
+	return ReloadTime;
 }
