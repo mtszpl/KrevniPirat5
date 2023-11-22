@@ -36,9 +36,6 @@ class KREVNI_PIRAT_API AVampire : public APawn
 	int32 CorpseRemainTime = 10;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UAnimMontage> DeadMontage;
-
-	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	TArray<TObjectPtr<UAnimMontage>> AttackMontages;
 
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))

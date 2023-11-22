@@ -47,8 +47,6 @@ void AVampire::GetHit(int32 damage)
 
 void AVampire::Die()
 {
-	//if (IsValid(DeadMontage))
-	//	Mesh->PlayAnimation(DeadMontage, false);
 	GetController()->UnPossess();
 	bIsDead = true;
 	OnDeath.Broadcast();

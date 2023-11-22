@@ -19,9 +19,9 @@ void AKrevni_PiratCharacter::SwordGrab()
 	Sword->AttachToComponent(SwordHand, FAttachmentTransformRules(EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, EAttachmentRule::SnapToTarget, false));
 	Sword->SetIsDrawn(true);
 	if (IsValid(SheathSwordMontage))
-		SwordAnimTime = SheathSwordMontage->GetPlayLength() * SheathSwordMontage->RateScale;
+		SwordDrawTime = SheathSwordMontage->GetPlayLength() * SheathSwordMontage->RateScale;
 	else
-		SwordAnimTime = 0;
+		SwordDrawTime = 0;
 }
 
 void AKrevni_PiratCharacter::SwordLeave()
@@ -30,9 +30,9 @@ void AKrevni_PiratCharacter::SwordLeave()
 	Sword->AttachToComponent(SwordAttach, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, false));
 	Sword->SetIsDrawn(false);
 	if (IsValid(DrawSwordMontage))
-		SwordAnimTime = DrawSwordMontage->GetPlayLength() * DrawSwordMontage->RateScale;
+		SwordDrawTime = DrawSwordMontage->GetPlayLength() * DrawSwordMontage->RateScale;
 	else
-		SwordAnimTime = 0;
+		SwordDrawTime = 0;
 }
 
 void AKrevni_PiratCharacter::GunGrab()
@@ -40,9 +40,9 @@ void AKrevni_PiratCharacter::GunGrab()
 	GetWorld()->GetTimerManager().ClearTimer(GunMoveHandle);
 	Gun->AttachToComponent(GunHand, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, false));
 	if (IsValid(SheathGunMontage))
-		GunAnimTime = SheathGunMontage->GetPlayLength();
+		GunDrawTime = SheathGunMontage->GetPlayLength();
 	else
-		GunAnimTime = 0;
+		GunDrawTime = 0;
 }
 
 void AKrevni_PiratCharacter::GunLeave()
@@ -50,9 +50,9 @@ void AKrevni_PiratCharacter::GunLeave()
 	GetWorld()->GetTimerManager().ClearTimer(GunMoveHandle);
 	Gun->AttachToComponent(GunAttach, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, false));
 	if (IsValid(DrawGunMontage))
-		GunAnimTime = DrawGunMontage->GetPlayLength();
+		GunDrawTime = DrawGunMontage->GetPlayLength();
 	else
-		GunAnimTime = 0;
+		GunDrawTime = 0;
 }
 
 void AKrevni_PiratCharacter::AfterSwordAttack()
@@ -115,12 +115,12 @@ void AKrevni_PiratCharacter::ToggleArmed()
 	if (!bIsArmed)
 	{
 		PlayAnimMontage(DrawSwordMontage);
-		GetWorld()->GetTimerManager().SetTimer(SwordMoveHandle, this, &AKrevni_PiratCharacter::SwordGrab, SwordAnimTime / 2, false);
+		GetWorld()->GetTimerManager().SetTimer(SwordMoveHandle, this, &AKrevni_PiratCharacter::SwordGrab, SwordDrawTime / 2, false);
 	}
 	else
 	{
 		PlayAnimMontage(SheathSwordMontage);
-		GetWorld()->GetTimerManager().SetTimer(SwordMoveHandle, this, &AKrevni_PiratCharacter::SwordLeave, SwordAnimTime / 2, false);
+		GetWorld()->GetTimerManager().SetTimer(SwordMoveHandle, this, &AKrevni_PiratCharacter::SwordLeave, SwordSheathTime / 2, false);
 	}
 	bIsArmed = !bIsArmed;
 }
@@ -132,7 +132,8 @@ void AKrevni_PiratCharacter::StartAiming()
 	if (IsValid(DrawGunMontage))
 	{
 		PlayAnimMontage(DrawGunMontage);
-		GetWorld()->GetTimerManager().SetTimer(GunMoveHandle, this, &AKrevni_PiratCharacter::GunGrab, GunAnimTime / 2, false);
+		UE_LOG(LogTemp, Log, TEXT("%f"), GunDrawTime);
+		GetWorld()->GetTimerManager().SetTimer(GunMoveHandle, this, &AKrevni_PiratCharacter::GunGrab, GunDrawTime / 2, false);
 	}
 	CameraBoom->SetRelativeLocation(CameraAimingOffset);
 	GetCharacterMovement()->MaxWalkSpeed = 300;
@@ -146,7 +147,7 @@ void AKrevni_PiratCharacter::StopAiming()
 	if (IsValid(SheathGunMontage))
 	{
 		PlayAnimMontage(SheathGunMontage);
-		GetWorld()->GetTimerManager().SetTimer(GunMoveHandle, this, &AKrevni_PiratCharacter::GunLeave , GunAnimTime / 2, false);
+		GetWorld()->GetTimerManager().SetTimer(GunMoveHandle, this, &AKrevni_PiratCharacter::GunLeave , GunSheathTime / 2, false);
 	}
 	CameraBoom->SetRelativeLocation({0, 0, 0});
 	GetCharacterMovement()->MaxWalkSpeed = 1200;
@@ -195,9 +196,13 @@ void AKrevni_PiratCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	if(IsValid(DrawSwordMontage))
-		SwordAnimTime = DrawSwordMontage->GetPlayLength() * DrawSwordMontage->RateScale;
+		SwordDrawTime = DrawSwordMontage->GetPlayLength() / DrawSwordMontage->RateScale;
 	if (IsValid(DrawGunMontage))
-		GunAnimTime = DrawGunMontage->GetPlayLength() * DrawGunMontage->RateScale;
+		GunDrawTime = DrawGunMontage->GetPlayLength() / DrawGunMontage->RateScale;
+	if(IsValid(SheathSwordMontage))
+		SwordSheathTime = SheathSwordMontage->GetPlayLength() / SheathSwordMontage->RateScale;
+	if (IsValid(SheathGunMontage))
+		GunSheathTime = SheathGunMontage->GetPlayLength() / SheathGunMontage->RateScale;
 
 	SwordAttach->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative, false),
 		FName("Pelvis"));

@@ -89,8 +89,10 @@ class AKrevni_PiratCharacter : public ACharacter
 	FTimerHandle GunMoveHandle;
 	FTimerHandle AttackHandle;
 
-	float SwordAnimTime = 0;
-	float GunAnimTime = 0;
+	float SwordDrawTime = 0;
+	float GunDrawTime = 0;
+	float SwordSheathTime = 0;
+	float GunSheathTime = 0;
 
 	UFUNCTION()
 	void SwordGrab();

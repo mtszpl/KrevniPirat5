@@ -21,7 +21,6 @@ AGun::AGun()
 
 void AGun::Fire(UCameraComponent* Camera)
 {
-	UE_LOG(LogTemp, Log, TEXT("%f"), RemainingReload);
 	FHitResult Hit;
 	if(GetWorld()->LineTraceSingleByChannel(Hit, Camera->GetComponentLocation(), Camera->GetComponentLocation() + Camera->GetForwardVector() * Range, ECollisionChannel::ECC_Visibility))
 	{

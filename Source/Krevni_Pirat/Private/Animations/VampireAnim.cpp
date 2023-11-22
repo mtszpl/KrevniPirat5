@@ -27,8 +27,4 @@ void UVampireAnim::NativeUpdateAnimation(float deltaSeconds)
 void UVampireAnim::Die()
 {
 	bIsDead = true;
-	FString dead;
-	bIsDead ? dead = FString("Dead") : dead = FString("Not dead");
-	//UE_LOG(LogTemp, Log, FText::FromString(dead));
-	GEngine->AddOnScreenDebugMessage(1, 5, FColor::Blue, dead);
 }
