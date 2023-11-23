@@ -17,7 +17,7 @@ class KREVNI_PIRAT_API AVampire : public APawn
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<USceneComponent> Root;
 
-	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<USkeletalMeshComponent> Mesh;
 
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
@@ -53,6 +53,7 @@ protected:
 
 public:	
 
+	UFUNCTION(BlueprintCallable)
 	void Attack();
 
 	void GetHit(int32 damage);
